@@ -43,8 +43,17 @@ def get_words():
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
+class ComplexEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%d')
+        elif isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self, obj)
+
 def get_today():
-  return datetime.strptime(str(date.today()), "%Y-%m-%d")
+  return json.dumps(today, cls=ComplexEncoder)
 
 client = WeChatClient(app_id, app_secret)
 
