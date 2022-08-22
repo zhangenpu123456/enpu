@@ -57,19 +57,19 @@ def get_today():
   ymd = json.dumps(today, cls=ComplexEncoder)
   weekday = datetime.now().weekday()
   if weekday == 0:
-    wk = 星期一
+    wk = "星期一"
   elif weekday == 1:
-    wk = 星期二
+    wk = "星期二"
   elif weekday == 2:
-    wk = 星期三
+    wk = "星期三"
   elif weekday == 3:
-    wk = 星期四
+    wk = "星期四"
   elif weekday == 4:
-    wk = 星期五
+    wk = "星期五"
   elif weekday == 5:
-    wk = 星期六
+    wk = "星期六"
   else:
-    wk = 星期日
+    wk = "星期日"
   return ymd + " " + wk
 
 client = WeChatClient(app_id, app_secret)
