@@ -55,7 +55,7 @@ class ComplexEncoder(json.JSONEncoder):
 
 def get_today():
   ymd = json.dumps(today, cls=ComplexEncoder)
-  return ymd+datetime.date.weekday()
+  return ymd+datetime.now().weekday()
 
 client = WeChatClient(app_id, app_secret)
 
