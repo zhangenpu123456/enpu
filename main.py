@@ -47,16 +47,30 @@ def get_random_color():
 class ComplexEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
-            return obj.strftime('%Y年%m月%d日')
+            return obj.strftime('%Y-%m-%d')
         elif isinstance(obj, date):
-            return obj.strftime('%Y年%m月%d日')
+            return obj.strftime('%Y-%m-%d')
         else:
             return json.JSONEncoder.default(self, obj)
 
 def get_today():
   ymd = json.dumps(today, cls=ComplexEncoder)
   weekday = datetime.now().weekday()
-  return ymd + str(weekday)
+  if weekday == 0:
+    wk = 星期一
+  elif weekday == 1:
+    wk = 星期二
+  elif weekday == 2:
+    wk = 星期三
+  elif weekday == 3:
+    wk = 星期四
+  elif weekday == 4:
+    wk = 星期五
+  elif weekday == 5:
+    wk = 星期六
+  else:
+    wk = 星期日
+  return ymd + " " + wk
 
 client = WeChatClient(app_id, app_secret)
 
